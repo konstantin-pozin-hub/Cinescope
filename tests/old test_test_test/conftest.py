@@ -68,3 +68,5 @@ def wrong_booking_data():
         },
         "additionalneeds": "Dinner"
     }
+
+
