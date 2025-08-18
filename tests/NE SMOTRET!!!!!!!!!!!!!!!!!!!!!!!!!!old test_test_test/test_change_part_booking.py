@@ -19,4 +19,4 @@ class TestBookings:
 
         get_booking = auth_session.get(f"{BASE_URL}/booking/{booking_id}")
         assert get_booking.status_code == 200, "Бронь не найдена"
-        assert get_booking.json()["lastname"] == booking_data1["lastname"], "Заданная фамилия не совпадает"
+        assert get_booking.json()["lastname"] == booking_data2["lastname"], "Заданная фамилия не совпадает"

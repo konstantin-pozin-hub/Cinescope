@@ -11,8 +11,8 @@
 # print(create_dict(a=1, b=2, c=3))
 
 
-def create_list(*args):
-    print(args)
-
-
-create_list(1, 2, 3, 4, 5, 6, 7, 8, 1, 1, 11, )
+# def create_list(*args):
+#     print(args)
+#
+#
+# create_list(1, 2, 3, 4, 5, 6, 7, 8, 1, 1, 11, )

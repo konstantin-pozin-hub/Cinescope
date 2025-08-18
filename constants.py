@@ -8,6 +8,8 @@ LOGIN_ENDPOINT = "/login"
 REGISTER_ENDPOINT = "/register"
 
 admin_data = {
-        "email": "api1@gmail.com",
-        "password": "asdqwe123Q"
-    }
+    "email": "api1@gmail.com",
+    "password": "asdqwe123Q"
+}
+
+movie_url = "https://api.dev-cinescope.coconutqa.ru/movies"

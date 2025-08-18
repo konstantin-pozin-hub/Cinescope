@@ -65,7 +65,7 @@ def admin_session():
     return session
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def test_user2():
     """
     Генерация случайного пользователя для тестов.
@@ -78,8 +78,8 @@ def test_user2():
         "fullName": random_name,
         "email": random_email,
         "password": random_password,
-        "verified": "true",
-        "banned": "false"
+        "verified": True,
+        "banned": False
     }
 
 
@@ -98,4 +98,25 @@ def test_user3():
         "password": random_password,
         "passwordRepeat": random_password,
         "roles": ["USER"]
+    }
+
+
+@pytest.fixture
+def test_movie1():
+    random_name = DataGenerator.generate_random_name()
+    return {
+        "name": random_name,
+        "imageUrl": "https://example.com/image.png",
+        "price": 100,
+        "description": "Описание фильма",
+        "location": "SPB",
+        "published": True,
+        "genreId": 1
+    }
+
+
+@pytest.fixture(scope="session")
+def test_movie2():
+    return {
+        "published": False
     }
