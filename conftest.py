@@ -120,3 +120,8 @@ def test_movie2():
     return {
         "published": False
     }
+
+
+@pytest.fixture(scope="session")
+def test_movie3():
+    return "sdfsdfsdfsdfsfsdf"

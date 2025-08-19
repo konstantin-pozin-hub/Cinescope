@@ -22,6 +22,10 @@ class TestMovie:
         movie_id = create_movie.json().get("id")
         assert movie_id is not None, "Идентификатор не найден в ответе"
 
+    def test_wrong_create_movie(self, admin_session, test_movie3):
+        create_movie = admin_session.post(movie_url, json=test_movie3, headers=HEADERS)
+        assert create_movie.status_code == 400, "Ошибка при создании юзера"
+
     def test_duble_create_movie(self, admin_session, test_movie1):
         create_movie = admin_session.post(movie_url, json=test_movie1, headers=HEADERS)
         assert create_movie.status_code == 201, "Ошибка при создании юзера"
@@ -35,9 +39,24 @@ class TestMovie:
         assert create_movie.status_code == 201, "Ошибка при создании юзера"
         movie_id = create_movie.json().get("id")
         assert movie_id is not None, "Идентификатор не найден в ответе"
-        delete_user = admin_session.delete(f"{movie_url}/{movie_id}", headers=HEADERS)
-        assert delete_user.status_code == 200
+        delete_movie = admin_session.delete(f"{movie_url}/{movie_id}", headers=HEADERS)
+        assert delete_movie.status_code == 200
 
+    def test_duble_delete_movie(self, admin_session, test_movie1):
+        create_movie = admin_session.post(movie_url, json=test_movie1, headers=HEADERS)
+        assert create_movie.status_code == 201, "Ошибка при создании юзера"
+        movie_id = create_movie.json().get("id")
+        assert movie_id is not None, "Идентификатор не найден в ответе"
+        delete_movie = admin_session.delete(f"{movie_url}/{movie_id}", headers=HEADERS)
+        assert delete_movie.status_code == 200
+        duble_delete_movie = admin_session.delete(f"{movie_url}/{movie_id}", headers=HEADERS)
+        assert duble_delete_movie.status_code == 404
+
+    def test_wrong_delete_movie(self,admin_session,test_movie1):
+        create_movie = admin_session.post(movie_url, json=test_movie1, headers=HEADERS)
+        assert create_movie.status_code == 201, "Ошибка создания юзера"
+        wrong_delete_movie = admin_session.delete(f"{movie_url}/aaaaaaaaaaaaa",headers=HEADERS)
+        assert wrong_delete_movie.status_code == 404
     def test_change_movie(self, admin_session, test_movie1, test_movie2):
         create_movie = admin_session.post(movie_url, json=test_movie1, headers=HEADERS)
         assert create_movie.status_code == 201, "Ошибка при создании юзера"
