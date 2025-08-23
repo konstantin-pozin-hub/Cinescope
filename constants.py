@@ -7,9 +7,11 @@ HEADERS = {
 LOGIN_ENDPOINT = "/login"
 REGISTER_ENDPOINT = "/register"
 
-admin_data = {
+
+ADMIN_DATA = {
     "email": "api1@gmail.com",
     "password": "asdqwe123Q"
 }
 
-movie_url = "https://api.dev-cinescope.coconutqa.ru/movies"
+MOVIE_ENDPOINT = "/movies"
+USER_ENDPOINT = "/user"
