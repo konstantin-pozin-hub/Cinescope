@@ -3,65 +3,29 @@ from constants import MOVIE_ENDPOINT
 
 
 class MovieAPI(CustomRequester):
-    """
-    Класс для работы с API фильмов.
-    """
 
-    # def __init__(self, session):
-    #     super().__init__(base_url=session.base_url)
-    #     self.session = session
+    USER_BASE_URL = "https://api.dev-cinescope.coconutqa.ru/"
 
-    def __init__(self, session, base_url):  # принимаем оба параметра
-        super().__init__(session=session, base_url="https://api.dev-cinescope.coconutqa.ru/")
+    def __init__(self, session):
+        self.session = session
+        super().__init__(session, self.USER_BASE_URL)
 
     def get_movie_info(self, movie_id, expected_status=200):
-        """
-        Получение информации о пользователе.
-        :param movie_id: ID фильма.
-        :param expected_status: Ожидаемый статус-код.
-        """
-        return self.send_request(
-            method="GET",
-            endpoint=f"{MOVIE_ENDPOINT}/{movie_id}",
-            expected_status=expected_status
-        )
+        return self.send_request("GET", f"movies/{movie_id}", expected_status=expected_status)
 
-    def get_movie_all(self, expected_status=200):
-        """
-        Получение информации о пользователе.
-        :param expected_status: Ожидаемый статус-код.
-        """
-        return self.send_request(
-            method="GET",
-            endpoint=MOVIE_ENDPOINT,
-            expected_status=expected_status
-        )
-
-    def delete_movie(self, movie_id, expected_status=200):
-        """
-        Удаление пользователя.
-        :param movie_id: ID фильма.
-        :param expected_status: Ожидаемый статус-код.
-        """
-        return self.send_request(
-            method="DELETE",
-            endpoint=f"/{MOVIE_ENDPOINT}/{movie_id}",
-            expected_status=expected_status
-        )
+    def get_all_movie(self, expected_status=200):
+        return self.send_request("GET", f"movies", expected_status=expected_status)
 
     def create_movie(self, test_movie, expected_status=201):
-        """
-
-        param test_movie: Данные с фильмом
-        param expected_status: Ожидаемый статус-код.
-        """
         return self.send_request(
+            endpoint="movies",
             method="POST",
-            endpoint=MOVIE_ENDPOINT,
             data=test_movie,
             expected_status=expected_status
-
         )
+
+    def delete_movie(self, movie_id, expected_status=204):
+        return self.send_request("DELETE", f"movies/{movie_id}", expected_status=expected_status)
 
     def patch_movie(self, movie_id, test_movie_for_updata, expected_status=200):
         return self.send_request(
@@ -70,3 +34,10 @@ class MovieAPI(CustomRequester):
             data=test_movie_for_updata,
             expected_status=expected_status
         )
+
+    def get_filtred_movie(self, params, expected_status=200):
+        string_params = ""
+        for param_name, param_value in params.items():
+            string_params += f"{param_name}={param_value}&"
+
+        return self.send_request("GET", f"movies/?{string_params}", expected_status=expected_status)

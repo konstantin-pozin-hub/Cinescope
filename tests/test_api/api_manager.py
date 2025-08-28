@@ -15,6 +15,9 @@ class ApiManager:
         """
         self.session = session
         self.auth_api = AuthAPI(session)
-        self.user_api = UserAPI(session, base_url)
+        self.user_api = UserAPI(session)
         self.base_url = base_url
-        self.movie_api = MovieAPI(session,base_url)
+        self.movie_api = MovieAPI(session)
+
+    def close_session(self):
+        self.session.close()

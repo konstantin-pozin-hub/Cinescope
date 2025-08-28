@@ -15,3 +15,15 @@ ADMIN_DATA = {
 
 MOVIE_ENDPOINT = "/movies"
 USER_ENDPOINT = "/user"
+
+# креды суперюзера
+USERNAME = 'api1@gmail.com'
+PASSWORD = 'asdqwe123Q'
+
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+RESET = '\033[0m'  # Сброс цвета к стандартному
+BOLD = '\033[1m'
+UNDERLINE = '\033[4m'

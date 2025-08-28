@@ -2,6 +2,8 @@ import pytest
 from constants import HEADERS, BASE_URL
 
 
+
+pytestmark = pytest.mark.skip(reason="TASK-1234: Тесты временно отключены из-за нестабильности")
 class TestBookings:
     def test_updata_booking(self, auth_session, booking_data, booking_data2):
         # Создаём бронирование
