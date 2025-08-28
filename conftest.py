@@ -100,24 +100,6 @@ def test_user_for_updata():
 
 
 @pytest.fixture(scope="function")
-def test_user_generate():
-    """
-    Генерация случайного пользователя для тестов.
-    """
-    random_email = DataGenerator.generate_random_email()
-    random_name = DataGenerator.generate_random_name()
-    random_password = DataGenerator.generate_random_password()
-
-    return {
-        "fullName": random_name,
-        "email": random_email,
-        "password": random_password,
-        "verified": True,
-        "banned": False
-    }
-
-
-@pytest.fixture(scope="function")
 def test_user_with_wrong_email():
     """
     Генерация случайного пользователя для тестов.
@@ -207,18 +189,12 @@ def super_admin(user_session):
 
 @pytest.fixture(scope="function")
 def creation_user_data(test_user):
-    random_password = DataGenerator.generate_random_password()
-    random_name = DataGenerator.generate_random_name()
-    random_email = DataGenerator.generate_random_email()
-    return TestUser(
-        email=random_email,
-        fullName=random_name,
-        password=random_password,
-        passwordRepeat=random_password,
-        roles=[Roles.USER.value],
-        verified=True,
-        banned=False
-    )
+    updated_data = test_user
+    updated_data.update({
+        "verified": True,
+        "banned": False
+    })
+    return updated_data
 
 
 @pytest.fixture(scope="function")
